@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FormGenius AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">
+        <div class="logo-icon">✦</div>
+        <div class="logo-text">
+          <span class="logo-name">FormGenius</span>
+          <span class="logo-badge">AI</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="icon-btn" id="settingsBtn" title="Settings">⚙</button>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" data-tab="fill">Fill Form</button>
+      <button class="tab" data-tab="profile">Profile</button>
+      <button class="tab" data-tab="context">Site Context</button>
+    </div>
+
+    <!-- Tab: Fill Form -->
+    <div class="tab-content active" id="tab-fill">
+      <div class="fill-section">
+        <div class="status-card" id="profileStatus">
+          <div class="status-dot" id="statusDot"></div>
+          <span id="statusText">Loading profile...</span>
+        </div>
+
+        <div class="field-preview" id="fieldPreview">
+          <div class="preview-label">Detected fields</div>
+          <div class="preview-count" id="fieldCount">—</div>
+        </div>
+
+        <button class="btn-primary" id="fillBtn">
+          <span class="btn-icon">⚡</span>
+          <span>Fill Form with AI</span>
+        </button>
+
+        <button class="btn-secondary" id="reviewBtn">
+          <span class="btn-icon">👁</span>
+          <span>Review & Fill</span>
+        </button>
+
+        <button class="btn-ghost" id="detectBtn">
+          <span>Scan Fields</span>
+        </button>
+
+        <div class="status-message" id="fillStatus"></div>
+      </div>
+    </div>
+
+    <!-- Tab: Profile -->
+    <div class="tab-content" id="tab-profile">
+      <div class="profile-section">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="name" placeholder="John Doe" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" id="firstName" placeholder="John" />
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" id="lastName" placeholder="Doe" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="john@example.com" />
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" id="phone" placeholder="+1 (555) 000-0000" />
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <input type="text" id="address" placeholder="123 Main St, City, State, ZIP" />
+        </div>
+        <div class="form-group">
+          <label>City</label>
+          <input type="text" id="city" placeholder="New York" />
+        </div>
+        <div class="form-group">
+          <label>LinkedIn URL</label>
+          <input type="url" id="linkedin" placeholder="https://linkedin.com/in/johndoe" />
+        </div>
+        <div class="form-group">
+          <label>Website / Portfolio</label>
+          <input type="url" id="website" placeholder="https://johndoe.dev" />
+        </div>
+        <div class="form-group">
+          <label>Current Role / Title</label>
+          <input type="text" id="role" placeholder="Senior Software Engineer" />
+        </div>
+        <div class="form-group">
+          <label>Company</label>
+          <input type="text" id="company" placeholder="Acme Corp" />
+        </div>
+        <div class="form-group">
+          <label>Years of Experience</label>
+          <input type="text" id="yearsExp" placeholder="5" />
+        </div>
+        <div class="form-group">
+          <label>Skills (comma separated)</label>
+          <input type="text" id="skills" placeholder="React, TypeScript, Node.js, Python" />
+        </div>
+        <div class="form-group">
+          <label>Professional Summary</label>
+          <textarea id="experience" placeholder="Brief professional bio or cover letter snippet..." rows="4"></textarea>
+        </div>
+
+        <button class="btn-primary" id="saveBtn">
+          <span class="btn-icon">💾</span>
+          <span>Save Profile</span>
+        </button>
+        <div class="status-message" id="saveStatus"></div>
+      </div>
+    </div>
+
+    <!-- Tab: Site Context -->
+    <div class="tab-content" id="tab-context">
+      <div class="context-section">
+        <div class="site-info">
+          <div class="site-label">Current Site</div>
+          <div class="site-hostname" id="currentSite">Loading...</div>
+        </div>
+
+        <div class="form-group">
+          <label>Custom Context for This Site</label>
+          <textarea id="siteContext" placeholder="e.g. For job forms, emphasize React and TypeScript skills. Target role: Senior Frontend Engineer." rows="5"></textarea>
+          <div class="form-hint">This context is sent to AI to customize how fields are filled on this specific site.</div>
+        </div>
+
+        <button class="btn-primary" id="saveContextBtn">
+          <span class="btn-icon">💾</span>
+          <span>Save Context</span>
+        </button>
+
+        <div class="context-examples">
+          <div class="examples-label">Quick presets</div>
+          <button class="preset-btn" data-preset="For job application forms, highlight leadership experience and technical skills. Always mention React and TypeScript expertise.">Job Application</button>
+          <button class="preset-btn" data-preset="For contact forms, keep responses brief and professional. Include website URL in relevant fields.">Contact Form</button>
+          <button class="preset-btn" data-preset="For event registration, use formal name and professional email. Include job title and company name.">Event Registration</button>
+        </div>
+
+        <div class="status-message" id="contextStatus"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

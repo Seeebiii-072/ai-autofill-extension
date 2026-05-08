@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FormGenius AI — Settings</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #0f0f17;
+      --bg3: #141420;
+      --bg4: #1a1a28;
+      --border: #252535;
+      --accent: #6366f1;
+      --accent-light: #818cf8;
+      --accent-dim: rgba(99,102,241,0.1);
+      --text: #f1f5f9;
+      --text2: #94a3b8;
+      --text3: #475569;
+      --success: #10b981;
+      --error: #ef4444;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Syne', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+
+    .logo-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 4px 16px rgba(99,102,241,0.4);
+    }
+
+    .logo-title {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .logo-subtitle {
+      font-size: 13px;
+      color: var(--text2);
+      margin-top: 2px;
+    }
+
+    .section {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    input[type="password"],
+    input[type="text"],
+    select {
+      width: 100%;
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      padding: 10px 14px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+    }
+
+    .hint {
+      font-size: 12px;
+      color: var(--text3);
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .hint a {
+      color: var(--accent-light);
+      text-decoration: none;
+    }
+
+    .hint a:hover { text-decoration: underline; }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+    }
+
+    .toggle-info {}
+    .toggle-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .toggle-desc {
+      font-size: 12px;
+      color: var(--text3);
+      margin-top: 3px;
+    }
+
+    .toggle {
+      position: relative;
+      width: 42px; height: 22px;
+      flex-shrink: 0;
+    }
+
+    .toggle input { opacity: 0; width: 0; height: 0; }
+
+    .toggle-slider {
+      position: absolute;
+      inset: 0;
+      background: var(--border);
+      border-radius: 22px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .toggle-slider::after {
+      content: '';
+      position: absolute;
+      width: 16px; height: 16px;
+      left: 3px; top: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+
+    .toggle input:checked + .toggle-slider {
+      background: var(--accent);
+    }
+
+    .toggle input:checked + .toggle-slider::after {
+      transform: translateX(20px);
+    }
+
+    .btn-save {
+      width: 100%;
+      padding: 13px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 16px rgba(99,102,241,0.35);
+    }
+
+    .btn-save:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(99,102,241,0.5);
+    }
+
+    .save-status {
+      text-align: center;
+      padding: 10px;
+      font-size: 13px;
+      color: var(--text3);
+      min-height: 36px;
+      transition: all 0.3s;
+    }
+
+    .save-status.success { color: var(--success); }
+    .save-status.error { color: var(--error); }
+
+    .api-key-wrapper {
+      position: relative;
+    }
+
+    .api-key-wrapper input {
+      padding-right: 50px;
+    }
+
+    .show-key-btn {
+      position: absolute;
+      right: 10px; top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text3);
+      cursor: pointer;
+      font-size: 12px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+    }
+
+    .show-key-btn:hover { color: var(--text2); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo-icon">✦</div>
+      <div>
+        <div class="logo-title">FormGenius AI</div>
+        <div class="logo-subtitle">Settings & Configuration</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">API Configuration — OpenRouter</div>
+
+      <div class="field">
+        <label>OpenRouter API Key</label>
+        <div class="api-key-wrapper">
+          <input type="password" id="apiKey" placeholder="sk-or-v1-..." />
+          <button class="show-key-btn" id="showKeyBtn">show</button>
+        </div>
+        <div class="hint">
+          Get your key at <a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a>.
+          Your key is stored locally in Chrome storage only — never shared anywhere else.
+        </div>
+      </div>
+
+      <div class="field" style="margin-top:14px;">
+        <label>AI Model</label>
+        <select id="model">
+          <optgroup label="🔥 Recommended">
+            <option value="openai/gpt-4o-mini">GPT-4o Mini (Fast &amp; Cheap)</option>
+            <option value="openai/gpt-4o">GPT-4o (Most Accurate)</option>
+            <option value="google/gemini-flash-1.5">Gemini Flash 1.5 (Fast)</option>
+            <option value="google/gemini-pro-1.5">Gemini Pro 1.5</option>
+          </optgroup>
+          <optgroup label="Anthropic">
+            <option value="anthropic/claude-3-haiku">Claude 3 Haiku (Fast)</option>
+            <option value="anthropic/claude-3.5-sonnet">Claude 3.5 Sonnet</option>
+          </optgroup>
+          <optgroup label="Open Source">
+            <option value="meta-llama/llama-3.1-8b-instruct">Llama 3.1 8B (Free)</option>
+            <option value="mistralai/mistral-7b-instruct">Mistral 7B (Free)</option>
+          </optgroup>
+        </select>
+        <div class="hint">GPT-4o Mini is recommended — fast, accurate, and very low cost.</div>
+      </div>
+
+      <div class="field" style="margin-top:14px;">
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg4);border:1px solid var(--border);border-radius:8px;">
+          <div id="testDot" style="width:8px;height:8px;border-radius:50%;background:var(--text3);flex-shrink:0;"></div>
+          <span id="testStatus" style="font-size:12px;color:var(--text3);flex:1;">Key not tested yet</span>
+          <button id="testBtn" style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text2);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;padding:5px 12px;cursor:pointer;">Test Key</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Behaviour</div>
+
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <div class="toggle-label">Review Mode by Default</div>
+          <div class="toggle-desc">Always show a preview before filling any form</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="reviewMode" />
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-row" style="border-top:1px solid var(--border); margin-top:4px; padding-top:16px;">
+        <div class="toggle-info">
+          <div class="toggle-label">Multi-Step Form Support</div>
+          <div class="toggle-desc">Continue filling as form advances to next steps</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="multiStep" checked />
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <button class="btn-save" id="saveBtn">Save Settings</button>
+    <div class="save-status" id="saveStatus"></div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
